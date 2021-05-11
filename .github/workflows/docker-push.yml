@@ -22,11 +22,9 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USER }}
         password: ${{ secrets.DOCKER_HUB_PASS }}
         repository: ${{ github.DOCKER_HUB_USER }}/slam_ros:latest
-        tag_with_ref: true
     - name: Push to Docker Hub
       uses: docker/build-push-action@v1
       with:
         username: ${{ secrets.DOCKER_HUB_USER }}
         password: ${{ secrets.DOCKER_HUB_PASS }}
-        repository: ${{ github.DOCKER_HUB_USER }}/slam_ros:cuda
-        tag_with_ref: true  
+        repository: ${{ github.DOCKER_HUB_USER }}/slam_ros:cuda  
