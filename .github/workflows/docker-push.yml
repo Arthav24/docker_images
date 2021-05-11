@@ -13,18 +13,10 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
-    - name: build images
+    - name: build and push images
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_HUB_USER }}
+        password: ${{ secrets.DOCKER_HUB_PASS }}
       working-directory: ./slam_ros
-      run: make image image_CUDA tag tag_cuda
-    - name: Push to Docker Hub
-      uses: docker/build-push-action@v1
-      with:
-        username: ${{ secrets.DOCKER_HUB_USER }}
-        password: ${{ secrets.DOCKER_HUB_PASS }}
-        repository: ${{ github.DOCKER_HUB_USER }}/slam_ros:latest
-    - name: Push to Docker Hub
-      uses: docker/build-push-action@v1
-      with:
-        username: ${{ secrets.DOCKER_HUB_USER }}
-        password: ${{ secrets.DOCKER_HUB_PASS }}
-        repository: ${{ github.DOCKER_HUB_USER }}/slam_ros:cuda  
+      run: make image image_CUDA tag tag_cuda push push_cuda

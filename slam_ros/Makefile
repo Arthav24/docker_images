@@ -55,6 +55,14 @@ tag_cuda:
 delete_container:
 	docker container rm ${CONTAINER_NAME}
 
+.PHONY:push
+push:
+	docker push arthav24/${IMAGE_NAME}:latest
+
+.PHONY:push_cuda
+push_cuda:
+	docker push arthav24/${IMAGE_NAME}:cuda
+
 .PHONY: delete_container_cuda
 delete_container_cuda:
 	docker container rm ${CONTAINER_NAME_CUDA}
