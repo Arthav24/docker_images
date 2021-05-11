@@ -15,8 +15,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Push to Docker Hub
         uses: docker/build-push-action@v1
-        dockerfile: ./slam_ros/Dockerfile
         with:
+          dockerfile: ./slam_ros/Dockerfile
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PASS }}
           repository: arthav24/slam_ros
