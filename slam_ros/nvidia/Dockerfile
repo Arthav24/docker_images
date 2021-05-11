@@ -1,0 +1,42 @@
+FROM nvidia/cudagl:11.3.0-base-ubuntu18.04
+# Minimal setup
+RUN apt-get update \
+ && apt-get install -y locales lsb-release
+ARG DEBIAN_FRONTEND=noninteractive
+RUN dpkg-reconfigure locales
+ 
+# Install ROS melodic
+RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends ros-melodic-desktop-full
+RUN apt-get install -y --no-install-recommends python-rosdep
+RUN rosdep init \
+ && rosdep fix-permissions \
+ && rosdep update
+RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+
+# Install Git
+RUN apt-get update &&  \ 
+    apt-get install -y git
+
+#Install catkin tools
+RUN apt-get update && \
+    apt-get install python-catkin-tools -y
+
+RUN apt-get install ros-melodic-navigation -y
+RUN apt-get install ros-melodic-slam-gmapping -y
+
+RUN echo "alias burger='export TURTLEBOT3_MODEL=burger'" >> ~/.bashrc && \
+    echo "alias waffle='export TURTLEBOT3_MODEL=waffle'" >> ~/.bashrc && \
+    echo "alias tb3fake='roslaunch turtlebot3_fake turtlebot3_fake.launch'" >> ~/.bashrc && \
+    echo "alias tb3teleop='roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch'" >> ~/.bashrc && \
+    echo "alias tb3='roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch'" >> ~/.bashrc && \
+    echo "alias tb3maze='roslaunch turtlebot3_gazebo turtlebot3_world.launch'" >> ~/.bashrc && \
+    echo "alias tb3house='roslaunch turtlebot3_gazebo turtlebot3_house.launch'" >> ~/.bashrc 
+
+
+COPY ./entrypoint.sh .
+ENTRYPOINT [ "/entrypoint.sh" ]
+
+WORKDIR /slam_ws
