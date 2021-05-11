@@ -11,17 +11,24 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - name: Build images
+    - name: Checkout repo
       uses: actions/checkout@v2
+    - name: build images
       working-directory: ./slam_ros
       run: make image image_CUDA
-    - name: Login to Docker Hub
-      working-directory: ./slam_ros
-      uses: docker/login-action@v1
-      with:
-        username: arthav24
-        password: 35e6c51a-e7eb-403b-8d67-f0b897fafd86
     - name: Tag images
-      run: docker tag slam_ros:latest arthav24/slam_ros:latest && docker tag  slam_ros:cuda arthav24/slam_ros:cuda
-    
-    
+      run: docker tag slam_ros:latest ${{ github.DOCKER_HUB_USER }}/slam_ros:latest && docker tag  slam_ros:cuda ${{ github.DOCKER_HUB_USER }}/slam_ros:cuda
+    - name: Push to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_HUB_USER }}
+        password: ${{ secrets.DOCKER_HUB_PASS }}
+        repository: ${{ github.DOCKER_HUB_USER }}/slam_ros:latest
+        tag_with_ref: true
+    - name: Push to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_HUB_USER }}
+        password: ${{ secrets.DOCKER_HUB_PASS }}
+        repository: ${{ github.DOCKER_HUB_USER }}/slam_ros:cuda
+        tag_with_ref: true  
