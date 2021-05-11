@@ -43,6 +43,14 @@ container_CUDA:
 	docker run -it --privileged --net=${NETWORK} \
 	${DOCKER_ARGS_CUDA} --name ${CONTAINER_NAME_CUDA} ${IMAGE_NAME}:cuda ${ENTRY_COMMMAND}
 
+.PHONY: tag
+tag:
+	docker tag ${IMAGE_NAME} arthav24/${IMAGE_NAME}
+
+.PHONY: tag_cuda
+tag_cuda:
+	docker tag ${IMAGE_NAME}:cuda arthav24/${IMAGE_NAME}:cuda
+
 .PHONY: delete_container	
 delete_container:
 	docker container rm ${CONTAINER_NAME}

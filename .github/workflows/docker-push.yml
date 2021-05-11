@@ -15,9 +15,7 @@ jobs:
       uses: actions/checkout@v2
     - name: build images
       working-directory: ./slam_ros
-      run: make image image_CUDA
-    - name: Tag images
-      run: docker tag slam_ros:latest ${{ github.DOCKER_HUB_USER }}/slam_ros:latest && docker tag  slam_ros:cuda ${{ github.DOCKER_HUB_USER }}/slam_ros:cuda
+      run: make image image_CUDA tag tag_cuda
     - name: Push to Docker Hub
       uses: docker/build-push-action@v1
       with:
