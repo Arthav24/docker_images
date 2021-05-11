@@ -19,5 +19,5 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PASS }}
-          repository: arthav24/slamros
-          tag_with_ref: true
+          repository: arthav24/slam_ros
+          tags: latest
