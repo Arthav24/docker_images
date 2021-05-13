@@ -5,7 +5,7 @@ SHELL [ "/bin/bash" , "-c" ]
  
 # Install Git
 RUN apt-get update &&  \ 
-    apt-get install -y git
+    apt-get install -y git build-essential xclip
 
 #Install catkin tools
 RUN apt-get update && \

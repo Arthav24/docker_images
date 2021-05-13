@@ -1,5 +1,5 @@
 # docker_images
-![Docker Hub CI](https://github.com/Arthav24/docker_images/actions/workflows/docker-push.yml/badge.svg)
+[![Docker Image Push to Hub](https://github.com/Arthav24/docker_images/actions/workflows/docker-push.yml/badge.svg)](https://github.com/Arthav24/docker_images/actions/workflows/docker-push.yml)
 
 Central repo for all my Dockerfiles/ Entrypoints and makefiles (some images available on docker hub)
 

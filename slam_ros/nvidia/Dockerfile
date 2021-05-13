@@ -14,11 +14,11 @@ RUN apt-get install -y --no-install-recommends python-rosdep
 RUN rosdep init \
  && rosdep fix-permissions \
  && rosdep update
-RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+RUN echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 
 # Install Git
 RUN apt-get update &&  \ 
-    apt-get install -y git
+    apt-get install -y git build-essential xclip
 
 #Install catkin tools
 RUN apt-get update && \
