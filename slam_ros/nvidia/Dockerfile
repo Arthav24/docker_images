@@ -31,7 +31,7 @@ RUN apt-get update && \
 RUN apt-get install ros-melodic-navigation -y
 RUN apt-get install ros-melodic-slam-gmapping -y
 
-COPY entrypoint.sh .
+COPY entrypoint.sh /
 ENTRYPOINT [ "/entrypoint.sh" ]
 
 RUN mkdir -p /home/ros/slam_ws && chown -R ros:ros /home/ros/slam_ws
