@@ -4,7 +4,6 @@ CONTAINER_NAME_CUDA = slam_cuda
 ENTRY_COMMMAND = bash
 NETWORK = host
 DOCKER_VOLUMES = \
-	-v ~/slam_ws:/slam_ws \
 	-v ~/.ssh:/root/.ssh \
 	-v "/tmp/.X11-unix:/tmp/.X11-unix:rw"
 
