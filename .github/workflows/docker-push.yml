@@ -20,5 +20,5 @@ jobs:
           dockerfile: ./slam_ros/Dockerfile
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PASS }}
-          repository: arthav24/slam_ros
-          tags: latest
+          tags: arthav24/slam_ros:latest
+          push: true
