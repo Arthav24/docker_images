@@ -18,14 +18,14 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PASS }}
-      - name: Push to Docker Hub
+      - name: latest image
         uses: docker/build-push-action@v2
         with:
           context: ./slam_ros/
           dockerfile: ./slam_ros/Dockerfile
           tags: ${{ secrets.DOCKER_HUB_USER }}/slam_ros:latest
           push: true
-      - name: Push to Docker Hub
+      - name: cuda image
         uses: docker/build-push-action@v2
         with:
           context: ./slam_ros/nvidia/
